@@ -180,6 +180,7 @@ export function normalizeGitHubWebhook(params: {
   const normalizedPayload = normalizePayload(params.eventType, payload);
   const threadKey = buildThreadKey(repo.fullName, normalizedPayload);
   const idempotencyKey = computeTaskIdempotencyKey({
+    deliveryId: params.deliveryId,
     repoFullName: repo.fullName,
     payload: normalizedPayload,
   });

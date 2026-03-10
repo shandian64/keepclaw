@@ -36,7 +36,7 @@ function normalizeAllowedEvents(value: unknown): TaskEnvelopeEventType[] {
   const allowed = value.filter((entry): entry is TaskEnvelopeEventType =>
     typeof entry === "string" ? isSupportedGitHubEventType(entry) : false,
   );
-  return allowed.length > 0 ? Array.from(new Set(allowed)) : [...SUPPORTED_GITHUB_EVENT_TYPES];
+  return Array.from(new Set(allowed));
 }
 
 export function resolveClawMeshConfig(pluginConfig?: Record<string, unknown>): ClawMeshConfig {

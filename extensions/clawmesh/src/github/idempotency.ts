@@ -19,10 +19,11 @@ export function computeTaskTraceId(threadKey: string): string {
 }
 
 export function computeTaskIdempotencyKey(params: {
+  deliveryId: string;
   repoFullName: string;
   payload: TaskEnvelopePayload;
 }): string {
-  return sha256Hex(payloadIdentity(params.repoFullName, params.payload));
+  return sha256Hex(`${params.deliveryId}:${payloadIdentity(params.repoFullName, params.payload)}`);
 }
 
 export function computeEnvelopeInputDigest(envelope: TaskEnvelope): string {
