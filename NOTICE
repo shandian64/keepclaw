@@ -1,0 +1,13 @@
+KeepClaw
+Copyright (C) 2026 shandian64
+
+This repository is a modified fork of OpenClaw:
+https://github.com/openclaw/openclaw
+
+KeepClaw is distributed under the GNU Affero General Public License,
+version 3 or (at your option) any later version. The upstream OpenClaw
+license text is preserved in LICENSES/openclaw-upstream-MIT.txt.
+
+This fork includes additional bundled plugins, bundled skills, source-install
+workflow changes, and local self-hosting integrations maintained in the
+KeepClaw repository.

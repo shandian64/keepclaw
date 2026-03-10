@@ -1,6 +1,8 @@
 node_modules
 **/node_modules/
 .env
+.env.local
+.env.*.local
 docker-compose.extra.yml
 dist
 pnpm-lock.yaml
@@ -81,6 +83,7 @@ apps/ios/*.mobileprovision
 # Local untracked files
 .local/
 docs/.local/
+scripts/dev/local.env
 IDENTITY.md
 USER.md
 .tgz
@@ -100,6 +103,7 @@ package-lock.json
 .agents
 .agent/
 skills-lock.json
+skills/*/runtime/
 
 # Local iOS signing overrides
 apps/ios/LocalSigning.xcconfig

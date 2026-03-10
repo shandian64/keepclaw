@@ -1,0 +1,14 @@
+{
+  "name": "@openclaw/tavily-search",
+  "version": "2026.3.8-beta.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "tavily": "1.0.2"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ]
+  }
+}

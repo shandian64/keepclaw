@@ -1,0 +1,23 @@
+{
+  "id": "local-output-guidance",
+  "name": "Local Output Guidance",
+  "description": "Injects a short output-completion hint only for the configured local Ollama model.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "provider": {
+        "type": "string",
+        "minLength": 1
+      },
+      "model": {
+        "type": "string",
+        "minLength": 1
+      },
+      "guidance": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

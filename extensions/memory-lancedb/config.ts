@@ -11,6 +11,11 @@ export type MemoryConfig = {
     dimensions?: number;
   };
   dbPath?: string;
+  dbPathByAgent?: Record<string, string>;
+  sharedDbPath?: string;
+  privateOnlyAgents?: string[];
+  sharedReadExcludeAgents?: string[];
+  sharedWriteExcludeAgents?: string[];
   autoCapture?: boolean;
   autoRecall?: boolean;
   captureMaxChars?: number;
@@ -97,7 +102,18 @@ export const memoryConfigSchema = {
     const cfg = value as Record<string, unknown>;
     assertAllowedKeys(
       cfg,
-      ["embedding", "dbPath", "autoCapture", "autoRecall", "captureMaxChars"],
+      [
+        "embedding",
+        "dbPath",
+        "dbPathByAgent",
+        "sharedDbPath",
+        "privateOnlyAgents",
+        "sharedReadExcludeAgents",
+        "sharedWriteExcludeAgents",
+        "autoCapture",
+        "autoRecall",
+        "captureMaxChars",
+      ],
       "memory config",
     );
 
@@ -111,6 +127,47 @@ export const memoryConfigSchema = {
 
     const captureMaxChars =
       typeof cfg.captureMaxChars === "number" ? Math.floor(cfg.captureMaxChars) : undefined;
+
+    let dbPathByAgent: Record<string, string> | undefined;
+    if (typeof cfg.dbPathByAgent !== "undefined") {
+      if (
+        !cfg.dbPathByAgent ||
+        typeof cfg.dbPathByAgent !== "object" ||
+        Array.isArray(cfg.dbPathByAgent)
+      ) {
+        throw new Error("dbPathByAgent must be an object mapping agent ids to db paths");
+      }
+      dbPathByAgent = {};
+      for (const [agentId, value] of Object.entries(cfg.dbPathByAgent as Record<string, unknown>)) {
+        if (typeof value !== "string") {
+          throw new Error(`dbPathByAgent.${agentId} must be a string`);
+        }
+        dbPathByAgent[agentId] = value;
+      }
+    }
+    const privateOnlyAgents = Array.isArray(cfg.privateOnlyAgents)
+      ? cfg.privateOnlyAgents.map((v) => {
+          if (typeof v !== "string") throw new Error("privateOnlyAgents entries must be strings");
+          return v;
+        })
+      : undefined;
+
+    const sharedReadExcludeAgents = Array.isArray(cfg.sharedReadExcludeAgents)
+      ? cfg.sharedReadExcludeAgents.map((v) => {
+          if (typeof v !== "string")
+            throw new Error("sharedReadExcludeAgents entries must be strings");
+          return v;
+        })
+      : undefined;
+
+    const sharedWriteExcludeAgents = Array.isArray(cfg.sharedWriteExcludeAgents)
+      ? cfg.sharedWriteExcludeAgents.map((v) => {
+          if (typeof v !== "string")
+            throw new Error("sharedWriteExcludeAgents entries must be strings");
+          return v;
+        })
+      : undefined;
+
     if (
       typeof captureMaxChars === "number" &&
       (captureMaxChars < 100 || captureMaxChars > 10_000)
@@ -128,6 +185,11 @@ export const memoryConfigSchema = {
         dimensions: typeof embedding.dimensions === "number" ? embedding.dimensions : undefined,
       },
       dbPath: typeof cfg.dbPath === "string" ? cfg.dbPath : DEFAULT_DB_PATH,
+      dbPathByAgent,
+      sharedDbPath: typeof cfg.sharedDbPath === "string" ? cfg.sharedDbPath : undefined,
+      privateOnlyAgents,
+      sharedReadExcludeAgents,
+      sharedWriteExcludeAgents,
       autoCapture: cfg.autoCapture === true,
       autoRecall: cfg.autoRecall !== false,
       captureMaxChars: captureMaxChars ?? DEFAULT_CAPTURE_MAX_CHARS,
@@ -160,6 +222,32 @@ export const memoryConfigSchema = {
     dbPath: {
       label: "Database Path",
       placeholder: "~/.openclaw/memory/lancedb",
+      advanced: true,
+    },
+    dbPathByAgent: {
+      label: "Per-Agent Database Paths",
+      help: "Optional mapping of agent id -> dedicated LanceDB path",
+      advanced: true,
+    },
+    sharedDbPath: {
+      label: "Shared Consensus Database Path",
+      placeholder: "~/.openclaw/memory/shared/lancedb",
+      help: "Optional shared consensus memory database for non-excluded agents",
+      advanced: true,
+    },
+    privateOnlyAgents: {
+      label: "Private-only Agents",
+      help: "Agents that keep private memory enabled but never read or write shared consensus memory",
+      advanced: true,
+    },
+    sharedReadExcludeAgents: {
+      label: "Shared Read Exclude Agents",
+      help: "Agents excluded from reading shared consensus memory",
+      advanced: true,
+    },
+    sharedWriteExcludeAgents: {
+      label: "Shared Write Exclude Agents",
+      help: "Agents excluded from writing shared consensus memory",
       advanced: true,
     },
     autoCapture: {

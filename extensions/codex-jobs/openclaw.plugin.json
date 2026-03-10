@@ -1,0 +1,15 @@
+{
+  "id": "codex-jobs",
+  "name": "Codex Jobs",
+  "description": "Background Codex workspace jobs with queueing, notifications, and reply commands.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "pollMs": {
+        "type": "integer",
+        "minimum": 1000
+      }
+    }
+  }
+}

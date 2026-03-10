@@ -30,6 +30,32 @@
       "placeholder": "~/.openclaw/memory/lancedb",
       "advanced": true
     },
+    "dbPathByAgent": {
+      "label": "Per-Agent Database Paths",
+      "help": "Optional mapping of agent id to dedicated LanceDB path",
+      "advanced": true
+    },
+    "sharedDbPath": {
+      "label": "Shared Consensus Database Path",
+      "placeholder": "~/.openclaw/memory/shared/lancedb",
+      "help": "Optional shared consensus memory database for non-excluded agents",
+      "advanced": true
+    },
+    "privateOnlyAgents": {
+      "label": "Private-only Agents",
+      "help": "Agents that keep private memory enabled but never read or write shared consensus memory",
+      "advanced": true
+    },
+    "sharedReadExcludeAgents": {
+      "label": "Shared Read Exclude Agents",
+      "help": "Agents excluded from reading shared consensus memory",
+      "advanced": true
+    },
+    "sharedWriteExcludeAgents": {
+      "label": "Shared Write Exclude Agents",
+      "help": "Agents excluded from writing shared consensus memory",
+      "advanced": true
+    },
     "autoCapture": {
       "label": "Auto-Capture",
       "help": "Automatically capture important information from conversations"
@@ -70,6 +96,33 @@
       },
       "dbPath": {
         "type": "string"
+      },
+      "dbPathByAgent": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "sharedDbPath": {
+        "type": "string"
+      },
+      "privateOnlyAgents": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "sharedReadExcludeAgents": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "sharedWriteExcludeAgents": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       },
       "autoCapture": {
         "type": "boolean"

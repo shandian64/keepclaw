@@ -1,0 +1,10 @@
+{
+  "id": "tavily-search",
+  "name": "Tavily Search",
+  "description": "Adds an optional Tavily-backed search tool for GPT sessions.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
