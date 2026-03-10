@@ -49,6 +49,8 @@ const requiredPathGroups = [
   "dist/plugin-sdk/bluebubbles.d.ts",
   "dist/plugin-sdk/copilot-proxy.js",
   "dist/plugin-sdk/copilot-proxy.d.ts",
+  "dist/plugin-sdk/clawmesh.js",
+  "dist/plugin-sdk/clawmesh.d.ts",
   "dist/plugin-sdk/device-pair.js",
   "dist/plugin-sdk/device-pair.d.ts",
   "dist/plugin-sdk/diagnostics-otel.js",

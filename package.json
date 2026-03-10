@@ -94,6 +94,10 @@
       "types": "./dist/plugin-sdk/copilot-proxy.d.ts",
       "default": "./dist/plugin-sdk/copilot-proxy.js"
     },
+    "./plugin-sdk/clawmesh": {
+      "types": "./dist/plugin-sdk/clawmesh.d.ts",
+      "default": "./dist/plugin-sdk/clawmesh.js"
+    },
     "./plugin-sdk/device-pair": {
       "types": "./dist/plugin-sdk/device-pair.d.ts",
       "default": "./dist/plugin-sdk/device-pair.js"

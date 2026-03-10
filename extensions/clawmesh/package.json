@@ -1,0 +1,12 @@
+{
+  "name": "clawmesh",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClawMesh dry-run orchestration plugin for KeepClaw/OpenClaw",
+  "type": "module",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

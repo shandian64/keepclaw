@@ -23,6 +23,7 @@ const pluginSdkSubpaths = [
   "acpx",
   "bluebubbles",
   "copilot-proxy",
+  "clawmesh",
   "device-pair",
   "diagnostics-otel",
   "diffs",
