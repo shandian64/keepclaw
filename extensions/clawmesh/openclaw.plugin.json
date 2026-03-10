@@ -1,0 +1,47 @@
+{
+  "id": "clawmesh",
+  "name": "ClawMesh",
+  "description": "GitHub dry-run orchestration scaffold with append-only receipts.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "github": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "webhookPath": {
+            "type": "string",
+            "default": "/plugins/clawmesh/github/webhook"
+          },
+          "webhookSecret": {
+            "type": "string",
+            "minLength": 1
+          },
+          "allowedEvents": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["issues", "issue_comment", "pull_request", "pull_request_review_comment"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "uiHints": {
+    "github.webhookPath": {
+      "label": "GitHub Webhook Path",
+      "help": "Public plugin-owned path for GitHub webhook delivery."
+    },
+    "github.webhookSecret": {
+      "label": "GitHub Webhook Secret",
+      "help": "Shared secret used to verify X-Hub-Signature-256.",
+      "sensitive": true
+    },
+    "github.allowedEvents": {
+      "label": "GitHub Allowed Events",
+      "help": "Small allowlist of GitHub webhook event types accepted by ClawMesh."
+    }
+  }
+}

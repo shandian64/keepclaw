@@ -10,6 +10,17 @@
 - GitHub searching footgun: don't limit yourself to the first 500 issues or PRs when wanting to search all. Unless you're supposed to look at the most recent, keep going until you've reached the last page in the search
 - Security advisory analysis: before triage/severity decisions, read `SECURITY.md` to align with OpenClaw's trust model and design boundaries.
 
+## ClawMesh Rules
+
+- The agent is running inside WSL; prefer WSL paths/mounts (for example `/mnt/c/...`) over raw Windows paths.
+- Before making changes, read `docs/specs/clawmesh/sdd.md` and `docs/specs/clawmesh/pr1.md`.
+- Work only on the current milestone unless explicitly asked to widen scope.
+- For the first task, implement only the PR-1 dry-run skeleton for `extensions/clawmesh`.
+- Propose a short plan before editing files.
+- Prefer small, reviewable commits/patches.
+- Run targeted tests only for changed areas.
+- Do not modify unrelated extensions unless required by build wiring.
+
 ## Project Structure & Module Organization
 
 - Source code: `src/` (CLI wiring in `src/cli`, commands in `src/commands`, web provider in `src/provider-web.ts`, infra in `src/infra`, media pipeline in `src/media`).
